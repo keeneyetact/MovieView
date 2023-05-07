@@ -1,8 +1,13 @@
-import { Heading } from "@chakra-ui/react";
+import { ContainerProps } from "@chakra-ui/react";
 import { FC } from "react";
+import { Popular } from "../popular";
 
-const HomePage: FC = () => {
-  return <Heading>Hello</Heading>;
+const HomePage: FC<ContainerProps> = () => {
+  return (
+    <>
+      <Popular />
+    </>
+  );
 };
 
 export default HomePage;
