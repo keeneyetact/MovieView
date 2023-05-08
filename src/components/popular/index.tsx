@@ -93,7 +93,7 @@ export const Popular: FC<ContainerProps> = (props) => {
           emptyColor="gray.200"
         />
       )}
-      <Divider my={16} />
+      <Divider mt={16} />
     </SectionContainer>
   );
 };
