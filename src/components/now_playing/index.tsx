@@ -25,8 +25,8 @@ export const NowPlaying: FC = () => {
   }, []);
 
   return (
-    <SectionContainer id="now_playing" pt={{ base: 6, md: 4 }}>
-      <Heading id="popular" my={8}>
+    <Flex id="now_playing" flexDir="column">
+      <Heading my={8} fontSize={{ base: "2rem", md: "1.5rem", lg: "2rem" }}>
         Now Playing
       </Heading>
       <Flex flexDir="column" gap={8}>
@@ -44,6 +44,6 @@ export const NowPlaying: FC = () => {
           />
         )}
       </Flex>
-    </SectionContainer>
+    </Flex>
   );
 };

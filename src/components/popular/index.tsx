@@ -1,4 +1,10 @@
-import { ContainerProps, Divider, Flex, Heading, Spinner } from "@chakra-ui/react";
+import {
+  ContainerProps,
+  Divider,
+  Flex,
+  Heading,
+  Spinner,
+} from "@chakra-ui/react";
 import { FC, useCallback, useEffect, useState } from "react";
 import { popular, Root } from "../types";
 import { API_KEY } from "../constant";
@@ -52,7 +58,12 @@ export const Popular: FC<ContainerProps> = (props) => {
       mt={{ base: "5.5rem", md: "4.5rem" }}
       {...props}
     >
-      <Heading id="popular">Popular Movies</Heading>
+      <Heading
+        id="popular"
+        fontSize={{ base: "2rem", md: "1.5rem", lg: "2rem" }}
+      >
+        Popular Movies
+      </Heading>
       {!loading ? (
         <Flex justifyContent="start" flexWrap="wrap" gap={4} my={8}>
           {badge
