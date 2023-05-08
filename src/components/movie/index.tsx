@@ -10,6 +10,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { MoviesT } from "../types";
+import { useRouter } from "next/router";
 
 interface Props {
   data: MoviesT;
@@ -17,6 +18,15 @@ interface Props {
 
 export const Movie: FC<Props> = ({ data }) => {
   const { id, title, poster_path, vote_average } = data;
+
+  const router = useRouter();
+
+  const handleClick = () => {
+    router.push({
+      pathname: "/movies",
+      query: { id },
+    });
+  };
 
   return (
     <SlideFade
@@ -36,10 +46,9 @@ export const Movie: FC<Props> = ({ data }) => {
       }}
     >
       <Flex
-        as={Link}
-        href={`/${id}`}
-        passHref
+        onClick={handleClick}
         flexDirection="column"
+        cursor="pointer"
         roundedTop="md"
         backgroundColor="gray.700"
         h="27rem"
@@ -91,7 +100,6 @@ export const Movie: FC<Props> = ({ data }) => {
 
         <Box as="div" py={2} w="14rem" textAlign="center">
           <Text
-            as="a"
             display="block"
             fontWeight="semibold"
             fontSize={{ base: "", md: "0.8rem" }}

@@ -19,7 +19,7 @@ export const SideMovies: FC<Props> = ({
 }) => {
   return (
     <Flex justifyContent="center" mx="auto" flexDir="column" id={id} {...rest}>
-      <Heading fontSize={{ base: "2rem", md: "1.74rem", lg: "2rem" }} mt={12}>
+      <Heading fontSize={{ base: "2rem", md: "1.5rem", lg: "2rem" }} mt={12}>
         {name}
       </Heading>
       <Flex flexDir="column" gap={8} mt={8} justifyContent="start">

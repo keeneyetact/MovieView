@@ -15,6 +15,7 @@ import { Link } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { Movies } from "../types";
 import { API_KEY } from "../constant";
+import { useRouter } from "next/router";
 
 const Search = () => {
   const [search, setSearch] = useState("");
@@ -64,6 +65,15 @@ const Search = () => {
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(event.target.value);
+  };
+
+  const router = useRouter();
+
+  const handleClick = (id: number) => {
+    router.push({
+      pathname: "/movies",
+      query: { id },
+    });
   };
 
   return (
@@ -132,20 +142,20 @@ const Search = () => {
                 borderRadius="2xl"
                 borderColor="gray.700"
               >
-                <Link
-                  as={NextLink}
-                  href={`/${movie.id}`}
+                <Box
                   display="flex"
                   w="100%"
                   _hover={{ bg: "gray.700" }}
                   alignItems="center"
                   borderRadius="2xl"
+                  cursor="pointer"
                   transition="ease-in-out 150ms"
                   px={3}
                   py={3}
                   onClick={() => {
                     setSearch("");
                     setHidden(true);
+                    handleClick(movie.id);
                   }}
                 >
                   {movie.poster_path ? (
@@ -163,7 +173,7 @@ const Search = () => {
                   )}
 
                   <Text ml="4"> {movie.title}</Text>
-                </Link>
+                </Box>
               </Flex>
             ))
           ) : (

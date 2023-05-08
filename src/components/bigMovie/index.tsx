@@ -7,7 +7,7 @@ import {
   Image,
   Text,
 } from "@chakra-ui/react";
-import Link from "next/link";
+import { useRouter } from "next/router";
 import { FC } from "react";
 import { MoviesT } from "../types";
 
@@ -18,26 +18,35 @@ interface Props extends FlexProps {
 export const BigMovie: FC<Props> = ({ data, ...rest }) => {
   const { id, title, vote_average, poster_path, overview, release_date } = data;
 
+  const router = useRouter();
+  const handleClick = () => {
+    router.push({
+      pathname: "/movies",
+      query: { id },
+    });
+  };
+
   return (
     <>
       <Flex
-        key={id}
         bg="gray.700"
         p={6}
         borderRadius="lg"
         boxShadow="md"
+        alignItems="center"
         {...rest}
       >
         <Box position="relative" as="span" display="inline-block">
-          <Link href={`/${id}`}>
+          <Box onClick={handleClick}>
             <Image
               src={`https://image.tmdb.org/t/p/w500${poster_path}`}
               alt={title}
               width="48"
+              height={{ md: "20rem", lg: "17rem" }}
               cursor="pointer"
               _hover={{ opacity: 0.75, transition: "ease-in-out 150ms" }}
             />
-          </Link>
+          </Box>
 
           {vote_average ? (
             <Box
@@ -55,10 +64,10 @@ export const BigMovie: FC<Props> = ({ data, ...rest }) => {
                 thickness="5px"
                 color={
                   vote_average >= 7.5
-                    ? "green.400"
+                    ? "green"
                     : vote_average >= 5
-                    ? "orange.400"
-                    : "red.400"
+                    ? "orange"
+                    : "red"
                 }
               >
                 <CircularProgressLabel
@@ -99,7 +108,7 @@ export const BigMovie: FC<Props> = ({ data, ...rest }) => {
           </Text>
           <Flex
             justifyContent={{ base: "start", md: "flex-end" }}
-            mt={{ base: 4, md: 8, lg: 24 }}
+            mt={{ base: 4, md: 4, lg: 24 }}
           >
             <Text>{new Date(release_date).toDateString()}</Text>
           </Flex>
