@@ -1,5 +1,4 @@
 import { FC } from "react";
-import Link from "next/link";
 import {
   Box,
   CircularProgress,
@@ -51,7 +50,7 @@ export const Movie: FC<Props> = ({ data }) => {
         cursor="pointer"
         roundedTop="md"
         backgroundColor="gray.700"
-        h="27rem"
+        h={{ base: "fit-content", md: "27rem" }}
       >
         <Box as="span" position="relative" display="inline-block" w="14rem">
           <Image
@@ -59,7 +58,7 @@ export const Movie: FC<Props> = ({ data }) => {
             alt={title}
             roundedTop="md"
             w="14rem"
-            h="fit-content"
+            h={{ base: "18rem", md: "fit-content" }}
             boxShadow="xl"
             transition="ease-in-out duration-150"
             _hover={{ opacity: 0.75 }}

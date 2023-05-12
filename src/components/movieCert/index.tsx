@@ -1,6 +1,5 @@
 import { Flex, Text } from "@chakra-ui/react";
 import { FC, useCallback, useEffect, useState } from "react";
-import { API_KEY } from "../constant";
 import { ReleaseDatesEntity, ResultsEntity } from "../types";
 
 interface Props {
@@ -10,12 +9,13 @@ interface Props {
 export const MovieCert: FC<Props> = ({ id }) => {
   const [cert, setCert] = useState<ReleaseDatesEntity["certification"]>();
   const [loading, setLoading] = useState(false);
+  const APIKEY = process.env.NEXT_PUBLIC_MOVIEDB_APIKEY;
 
   const fetchMovieCert = useCallback(async () => {
     setLoading(true);
 
     const data = await fetch(
-      `https://api.themoviedb.org/3/movie/${id}/release_dates?api_key=${API_KEY}&language=en-GB`
+      `https://api.themoviedb.org/3/movie/${id}/release_dates?api_key=${APIKEY}&language=en-GB`
     );
     const certs = await data.json();
 

@@ -7,7 +7,6 @@ import {
 } from "@chakra-ui/react";
 import { FC, useCallback, useEffect, useState } from "react";
 import { popular, Root } from "../types";
-import { API_KEY } from "../constant";
 import { GenreBadges } from "../genre";
 import { Movie } from "../movie";
 import { PopularFlex } from "../layout/popularFlex";
@@ -18,12 +17,13 @@ export const Popular: FC<ContainerProps> = (props) => {
   const [badge, setBadge] = useState<Root["genres"]>([]);
   const [selectedBadgeId, setSelectedBadgeId] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
+  const APIKEY = process.env.NEXT_PUBLIC_MOVIEDB_APIKEY;
 
   const badgeRequest = useCallback(async () => {
     try {
       setLoading(true);
       const query = await fetch(
-        `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=en-GB`
+        `https://api.themoviedb.org/3/genre/movie/list?api_key=${APIKEY}&language=en-GB`
       );
       const genreData = await query.json();
       setBadge(genreData.genres);
@@ -37,7 +37,7 @@ export const Popular: FC<ContainerProps> = (props) => {
     try {
       setLoading(true);
       const query = await fetch(
-        `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-GB&page=1`
+        `https://api.themoviedb.org/3/movie/popular?api_key=${APIKEY}&language=en-GB&page=1`
       );
       const popularMovies = await query.json();
       setMovies(popularMovies.results);

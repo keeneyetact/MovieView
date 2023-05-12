@@ -11,10 +11,7 @@ import {
 } from "@chakra-ui/react";
 import { useState, useEffect, useRef, useCallback } from "react";
 import { BiSearch } from "react-icons/bi";
-import { Link } from "@chakra-ui/react";
-import NextLink from "next/link";
 import { Movies } from "../types";
-import { API_KEY } from "../constant";
 import { useRouter } from "next/router";
 
 const Search = () => {
@@ -24,12 +21,13 @@ const Search = () => {
   const [hidden, setHidden] = useState(true);
   const inputElement = useRef(null);
   const searchRef = useRef<HTMLDivElement>(null);
+  const APIKEY = process.env.NEXT_PUBLIC_MOVIEDB_APIKEY;
 
   const fetchSearch = useCallback(async () => {
     setLoading(true);
 
     const data = await fetch(
-      `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=en-GB&query=${search}&page=1&include_adult=false`
+      `https://api.themoviedb.org/3/search/movie?api_key=${APIKEY}&language=en-GB&query=${search}&page=1&include_adult=false`
     );
     const movies = await data.json();
     setResults(movies.results.slice(0, 7));

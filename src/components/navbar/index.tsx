@@ -5,6 +5,7 @@ import Search from "../search";
 import { MobileDrawer } from "./MobileDrawer";
 import { MobileToggle } from "./MobileToggle";
 import { NavLinks } from "./NavLinks";
+import { useRouter } from "next/router";
 
 interface Props extends ContainerProps {
   isShrunk: boolean;
@@ -12,6 +13,8 @@ interface Props extends ContainerProps {
 
 export const Navbar: FC<Props> = ({ isShrunk, ...rest }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const path = useRouter().pathname;
+
   return (
     <Flex
       py={{ base: 3, md: 2 }}
@@ -48,12 +51,16 @@ export const Navbar: FC<Props> = ({ isShrunk, ...rest }) => {
           <Logo w={32} h={14} />
         </Link>
 
-        <NavLinks
-          marginInlineEnd={{ md: "1rem" }}
-          display={{ base: "none", md: "flex", lg: "flex" }}
-          height="2.5rem"
-          gap={{ base: "1.2rem", md: "2rem", lg: "4rem" }}
-        />
+        {path.includes("/movies") ? (
+          <Link href="/">Home</Link>
+        ) : (
+          <NavLinks
+            marginInlineEnd={{ md: "1rem" }}
+            display={{ base: "none", md: "flex", lg: "flex" }}
+            height="2.5rem"
+            gap={{ base: "1.2rem", md: "2rem", lg: "4rem" }}
+          />
+        )}
 
         <Search />
 

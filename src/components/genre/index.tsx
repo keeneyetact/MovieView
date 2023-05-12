@@ -1,7 +1,6 @@
 import { FC } from "react";
 import { Badge as CBadge, BadgeProps, Text } from "@chakra-ui/react";
 import { GenresEntity, popular } from "../types";
-import { API_KEY } from "../constant";
 
 interface Props extends BadgeProps {
   data: GenresEntity;
@@ -18,12 +17,13 @@ export const GenreBadges: FC<Props> = ({
   ...rest
 }) => {
   const { id, name } = data;
+  const APIKEY = process.env.NEXT_PUBLIC_MOVIEDB_APIKEY;
 
   const handleClick = async () => {
     try {
       setSelectedBadgeId(id);
       const query = await fetch(
-        `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-GB&sort_by=popularity.desc&with_genres=${id}`
+        `https://api.themoviedb.org/3/discover/movie?api_key=${APIKEY}&language=en-GB&sort_by=popularity.desc&with_genres=${id}`
       );
       const { results } = await query.json();
       setMovies(results);

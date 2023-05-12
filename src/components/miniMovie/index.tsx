@@ -1,4 +1,4 @@
-import { Box, Flex, FlexProps, Image, Link, Text } from "@chakra-ui/react";
+import { Box, Flex, FlexProps, Image, Text } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { FC } from "react";
 import { MoviesT } from "../types";
